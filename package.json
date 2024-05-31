@@ -1,0 +1,18 @@
+{
+  "name": "weather_api",
+  "version": "1.0.0",
+  "description": "a simple weather cli",
+  "main": "index.js",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "wcli": "./src/index.js",
+    "start": "tsc && node --env-file=.env ./dist/index.js"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.12.13",
+    "rimraf": "^5.0.7",
+    "typescript": "^5.4.5"
+  }
+}
