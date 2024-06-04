@@ -8,7 +8,8 @@
   "scripts": {
     "wcli": "./src/index.js",
     "lint": "eslint .",
-    "start": "tsc && node --env-file=.env ./dist/index.js"
+    "start": "tsc && node --env-file=.env ./dist/index.js",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "got": "^14.3.0"
