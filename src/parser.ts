@@ -1,4 +1,4 @@
-const envSet: Set<string> = new Set(["dev"])
+const envSet: Set<string> = new Set(["itg", "dev", "tst"])
 const apiSet: Set<string> = new Set(["sales", "stocks", "product-search"])
 
 // Map of key = supported flag / val = Sets of allowed User input peer flag
@@ -16,19 +16,15 @@ const checkForError = (flags: Array<string>, params: Array<string>) => {
             throw new Error("unknown flag: " + flags[i])
         else if (!flagsMap.get(flags[i])?.has(params[i])){
             throw new Error(`"${flags[i]} ${params[i]}" is unvalid.
-            Authorised value for env are: ${[...envSet.values()]}
-            Authorised value for api are: ${[...apiSet.values()]}
+            - Authorised value for env are: ${[...envSet.values()]}
+            - Authorised value for api are: ${[...apiSet.values()]}
             `)
         }
     }
 } 
 
-/**
- * returns a array [envSet, apiSet] based params. 
- * @params userParams
- * the user input that has been parsed
- * */
 const buildEnvAndApiSet = (userParams: Array<string>): Array<Set<string>> => {
+    
     let newEnvSet: Set<string> = new Set(userParams.filter((userParam) => envSet.has(userParam)))
     let newApiSet: Set<string> = new Set(userParams.filter((userParam) => apiSet.has(userParam)))
 

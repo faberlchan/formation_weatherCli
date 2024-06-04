@@ -1,18 +1,16 @@
 import got from 'got'
+import {envKeys, ApiVersion} from 'types.js'
 
 const BASE_URL: string | undefined = process.env.BASE_URL
 const PROTOCOL: string = "https://"
 const URL_V1: string = "/v1/version"
 const URL: string  = "/version"
 
-type envKeys = 'itg' | 'dev' | 'tst'
-const postUrlRoute: Record<envKeys, string> = {
+const urlRoute: Record<envKeys, string> = {
     itg: URL,
     dev: URL_V1,
     tst: URL_V1
 }
-
-type ApiVersion = {version: string}
 
 function isApiVersion(apiVersion: unknown): apiVersion is ApiVersion {
     return (apiVersion as ApiVersion).version !== undefined;
@@ -32,12 +30,16 @@ const getData = async (url: string): Promise<{version: string}> => {
 }
 
 const createUrl = (env: envKeys, api: string): string => {
-    return PROTOCOL + env + BASE_URL + api + postUrlRoute[env]
+    const url = env === "tst" && api === "stocks" ? URL : urlRoute[env]
+    
+    return PROTOCOL + env + BASE_URL + api + url
 }
 
 const callApi = (env: envKeys, apiSet: Set<string>) => {
     apiSet.forEach((api) => 
-        getData(createUrl(env, api)).then((res) => console.log(`${api} : ${JSON.stringify(res)}`) )
+        getData(createUrl(env, api))
+        .then((res) => console.log(`${env} ${api} : ${JSON.stringify(res)}`))
+        .catch(() => console.log(`error with ${createUrl(env, api)}`))
     )
 } 
 
