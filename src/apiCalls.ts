@@ -17,16 +17,12 @@ function isApiVersion(apiVersion: unknown): apiVersion is ApiVersion {
 }
 
 const getData = async (url: string): Promise<{version: string}> => {
-    try {
         const res = await got
             .get(url)
             .json();
         if (isApiVersion(res))
             return res
         throw new Error("invalid response type recieved")
-    } catch (e) {
-        throw e
-    }
 }
 
 const createUrl = (env: envKeys, api: string): string => {
