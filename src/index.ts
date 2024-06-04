@@ -7,8 +7,6 @@ import { parseUserInput } from './parser.js'
 // todo commonJs got 11.8.0
 // base url should be in a .env 
 
-
-
 try {
     const [envSet, apiSet]: Array<Set<string>>  = parseUserInput()
     printApiVersion(envSet, apiSet)

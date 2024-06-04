@@ -1,5 +1,5 @@
-const envSet = new Set(["dev"])
-const apiSet = new Set(["sales", "stocks", "product-search"])
+const envSet: Set<string> = new Set(["dev"])
+const apiSet: Set<string> = new Set(["sales", "stocks", "product-search"])
 
 // Map of key = supported flag / val = Sets of allowed User input peer flag
 const flagsMap = new Map<string, Set<string>>([
